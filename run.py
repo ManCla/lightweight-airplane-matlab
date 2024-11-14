@@ -17,9 +17,9 @@ end_value = 300
 rate = 0.005
 n_steps_ramp = int(end_value/rate)
 # the second dimension (,1) is important to make these column vectors
-reference_altitude = np.concatenate(#(np.zeros((1000,1)),
-                                    #np.reshape(np.linspace(0,end_value,n_steps_ramp),(n_steps_ramp,1)),
-                                    0*end_value*np.ones((n_steps,1)))#)
+reference_altitude = np.concatenate((np.zeros((1000,1)),
+                                    np.reshape(np.linspace(0,end_value,n_steps_ramp),(n_steps_ramp,1)),
+                                    end_value*np.ones((n_steps,1))))
 reference_altitude = reference_altitude[0:n_steps]
 
 # run simulink model

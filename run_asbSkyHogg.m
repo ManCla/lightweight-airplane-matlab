@@ -12,9 +12,7 @@ function output = run_asbSkyHogg(test_duration,dt,reference_altitude)
     load('asbSkyHoggData.mat')
 
     time = [0:dt:test_duration]';
-    % size(time)
-    % size(reference_altitude)
-    reference_altitude = [time,reference_altitude'];
+    reference_altitude = [time,reference_altitude];
 
     % create simulation input object and fill it with the needed values
     simIn = Simulink.SimulationInput(simlk_filename);
