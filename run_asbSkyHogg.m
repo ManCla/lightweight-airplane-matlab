@@ -11,8 +11,17 @@ function output = run_asbSkyHogg(test_duration,dt,reference_altitude)
     simlk_filename = "asbSkyHogg";
     load('asbSkyHoggData.mat')
 
-    time = [0:dt:test_duration]';
-    reference_altitude = [time,reference_altitude];
+    max_test_duration = 1800; % maximum possible test duration
+    if test_duration>max_test_duration
+        disp('WARNING: you are trying to run a test longer than expected in Simulink')
+    end
+
+    time = [0:dt:max_test_duration]';
+    test_steps = length([0:dt:test_duration]');
+    padding_length = length(time)-test_steps;
+    ref_padding = reference_altitude(end)*ones(padding_length,1);
+    ref_alt_padded = [reference_altitude;ref_padding];
+    reference_altitude = [time,ref_alt_padded];
 
     % create simulation input object and fill it with the needed values
     simIn = Simulink.SimulationInput(simlk_filename);
