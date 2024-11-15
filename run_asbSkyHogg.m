@@ -24,6 +24,8 @@ function output = run_asbSkyHogg(test_duration,dt,reference_altitude)
     reference_altitude = [time,ref_alt_padded];
 
     % create simulation input object and fill it with the needed values
+    % (need to either send the variables as simulation input to the simulink
+    % model or to change the scope of the simulink model to this function)
     simIn = Simulink.SimulationInput(simlk_filename);
     simIn = setVariable(simIn,'statdyn',statdyn,'Workspace',simlk_filename);
     simIn = setVariable(simIn,'test_duration',test_duration,'Workspace',simlk_filename);
@@ -32,9 +34,9 @@ function output = run_asbSkyHogg(test_duration,dt,reference_altitude)
 
     simIn = simIn.setModelParameter('SimulationMode','Rapid');
     % simIn = simIn.setModelParameter('RapidAcceleratorUpToDateCheck','off');
-    % need to either send the variables as simulation input to the simulink
-    % model or to change the scope of the simulink model to this function
-    sim_output = sim(simIn);
+
+    % using evalc instead of sim_output = sim(simIn) to suppress printout
+    evalc('sim_output = sim(simIn);')
     altitude = sim_output.sim_output;
     output = altitude;
 
