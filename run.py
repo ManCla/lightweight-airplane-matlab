@@ -10,6 +10,7 @@ print(" -- Matlab Engine Started")
 # NOTE: - for matlab it is important that they are doubles (hence defined with the .0)
 #       - arrays need to be cast to matlab arrays
 #       - matlab function will add the time steps to the input arrays
+base_altitude = 2000
 test_duration = 100.0
 dt = 0.001
 n_steps = int(test_duration/dt)+1
@@ -20,7 +21,7 @@ n_steps_ramp = int(end_value/rate)
 reference_altitude = np.concatenate((np.zeros((1000,1)),
                                     np.reshape(np.linspace(0,end_value,n_steps_ramp),(n_steps_ramp,1)),
                                     end_value*np.ones((n_steps,1))))
-reference_altitude = reference_altitude[0:n_steps]
+reference_altitude = reference_altitude[0:n_steps]+base_altitude*np.ones((n_steps,1))
 
 # run simulink model
 print(" -- Start running Simulink model")
