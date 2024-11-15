@@ -36,7 +36,7 @@ function output = run_asbSkyHogg(test_duration,dt,reference_altitude)
     % simIn = simIn.setModelParameter('RapidAcceleratorUpToDateCheck','off');
 
     % using evalc instead of sim_output = sim(simIn) to suppress printout
-    evalc('sim_output = sim(simIn);')
+    evalc('sim_output = sim(simIn);');
     altitude = sim_output.sim_output;
     output = altitude;
 
