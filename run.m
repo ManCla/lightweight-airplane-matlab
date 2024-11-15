@@ -4,6 +4,7 @@
 clear
 
 % define inputs
+base_altitude = 2000; % do not change, this is kinda fixed in the model by alt0
 test_duration = 100.0;
 dt = 0.001;
 time = 0:dt:test_duration;
@@ -17,6 +18,8 @@ reference_altitude = [
     end_value*ones(length(time),1); % make vector long enough
    ];
 reference_altitude=reference_altitude(1:length(time)); % ensure same length
+
+reference_altitude=reference_altitude+base_altitude;
 
 % call function
 altitude = run_asbSkyHogg(test_duration,dt,reference_altitude);

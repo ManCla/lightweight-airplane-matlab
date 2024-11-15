@@ -21,6 +21,8 @@ function output = run_asbSkyHogg(test_duration,dt,reference_altitude)
     simIn = setVariable(simIn,'dt',dt,'Workspace',simlk_filename);
     simIn = setVariable(simIn,'reference_altitude',reference_altitude,'Workspace',simlk_filename);
 
+    simIn = simIn.setModelParameter('SimulationMode','Rapid');
+    % simIn = simIn.setModelParameter('RapidAcceleratorUpToDateCheck','off');
     % need to either send the variables as simulation input to the simulink
     % model or to change the scope of the simulink model to this function
     sim_output = sim(simIn);
