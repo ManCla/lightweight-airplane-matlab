@@ -38,6 +38,11 @@ plt.plot(time,reference_altitude)
 plt.plot(time,out)
 plt.show()
 
+# save results to file
+time = time[:, np.newaxis]
+to_save = np.column_stack((time,reference_altitude,out))
+np.savetxt('results.csv',to_save,delimiter=',',fmt='%f')
+
 # close matlab engine
 eng.quit()
 print(" -- Matlab Engine Quit")
